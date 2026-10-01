@@ -7,10 +7,16 @@ menu.onclick = () =>{
     navbar.classList.toggle('active');
     
 };
-window.onscroll = () =>{
-    menu.classList.remove('fa-times');
-    navbar.classList.remove('active');
-   
+let ticking = false;
+window.onscroll = () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            menu.classList.remove('fa-times');
+            navbar.classList.remove('active');
+            ticking = false;
+        });
+        ticking = true;
+    }
 };
 /* Slides */
 
@@ -138,6 +144,15 @@ var swiper = new Swiper(".blogs-slider", {
         interval: 150,
         opacity: 0
     });
+
+    /*sr.reveal('.banner', {
+        origin: 'bottom',
+        distance: '50px',
+        duration: 1000,
+        interval: 200,
+        opacity: 0
+    });*/
+
     /*novo*/
     function animarContador(elemento, inicio, fim, duracao, sufixo = '') {
     let startTime = null;
